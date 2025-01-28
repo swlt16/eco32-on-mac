@@ -1,0 +1,41 @@
+diff --color --exclude=.git -ruN eos32-on-eco32/disk/mkfs/Makefile eos32-on-eco32/disk/mkfs/Makefile
+--- eos32-on-eco32/disk/mkfs/Makefile	2025-01-28 01:28:51
++++ eos32-on-eco32/disk/mkfs/Makefile	2025-01-28 00:20:26
+@@ -5,9 +5,10 @@
+ BUILD = ../../build
+ 
+ CC = gcc
+-CFLAGS = -g -Wall
+-LDFLAGS = -g
++CFLAGS = -g -Wall -I/opt/homebrew/opt/util-linux/include
++LDFLAGS = -g -L/opt/homebrew/opt/util-linux/lib
+ LDLIBS = -luuid -lm
++
+ 
+ SRCS = mkfs.c gpt.c
+ OBJS = $(patsubst %.c,%.o,$(SRCS))
+diff --color --exclude=.git -ruN eos32-on-eco32/disk/shfs/Makefile eos32-on-eco32/disk/shfs/Makefile
+--- eos32-on-eco32/disk/shfs/Makefile	2025-01-28 01:28:51
++++ eos32-on-eco32/disk/shfs/Makefile	2025-01-28 00:21:15
+@@ -5,8 +5,8 @@
+ BUILD = ../../build
+ 
+ CC = gcc
+-CFLAGS = -g -Wall
+-LDFLAGS = -g
++CFLAGS = -g -Wall -I/opt/homebrew/opt/util-linux/include
++LDFLAGS = -g -L/opt/homebrew/opt/util-linux/lib
+ LDLIBS = -luuid -lm
+ 
+ SRCS = shfs.c gpt.c
+diff --color --exclude=.git -ruN eos32-on-eco32/userland/usr/Makefile eos32-on-eco32/userland/usr/Makefile
+--- eos32-on-eco32/userland/usr/Makefile	2025-01-28 01:28:51
++++ eos32-on-eco32/userland/usr/Makefile	2025-01-28 00:36:22
+@@ -13,5 +13,5 @@
+ .PHONY:		install
+ 
+ install:
+-		cp -r --dereference . $(BUILD)/usr
++		cp -r -L . $(BUILD)/usr
+ 		rm $(BUILD)/usr/Makefile
+\ No newline at end of file

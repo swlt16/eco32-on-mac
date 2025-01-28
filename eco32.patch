@@ -1,0 +1,101 @@
+diff --color --exclude=.git -ruN eco32/disk/tools/mkgpt/Makefile eco32/disk/tools/mkgpt/Makefile
+--- eco32/disk/tools/mkgpt/Makefile	2025-01-28 01:29:19
++++ eco32/disk/tools/mkgpt/Makefile	2025-01-28 00:26:31
+@@ -5,8 +5,8 @@
+ BUILD = ../../../build
+ 
+ CC = gcc
+-CFLAGS = -g -Wall
+-LDFLAGS = -g
++CFLAGS = -g -Wall -I/opt/homebrew/opt/util-linux/include
++LDFLAGS = -g -L/opt/homebrew/opt/util-linux/lib
+ LDLIBS = -luuid -lm
+ 
+ SRCS = mkgpt.c
+diff --color --exclude=.git -ruN eco32/disk/tools/mkpart/Makefile eco32/disk/tools/mkpart/Makefile
+--- eco32/disk/tools/mkpart/Makefile	2025-01-28 01:29:19
++++ eco32/disk/tools/mkpart/Makefile	2025-01-28 00:28:56
+@@ -5,8 +5,8 @@
+ BUILD = ../../../build
+ 
+ CC = gcc
+-CFLAGS = -g -Wall
+-LDFLAGS = -g
++CFLAGS = -g -Wall -I/opt/homebrew/opt/util-linux/include
++LDFLAGS = -g -L/opt/homebrew/opt/util-linux/lib
+ LDLIBS = -luuid -lm
+ 
+ SRCS = mkpart.c
+diff --color --exclude=.git -ruN eco32/disk/tools/rmpart/Makefile eco32/disk/tools/rmpart/Makefile
+--- eco32/disk/tools/rmpart/Makefile	2025-01-28 01:29:19
++++ eco32/disk/tools/rmpart/Makefile	2025-01-28 00:30:21
+@@ -5,8 +5,8 @@
+ BUILD = ../../../build
+ 
+ CC = gcc
+-CFLAGS = -g -Wall
+-LDFLAGS = -g
++CFLAGS = -g -Wall -I/opt/homebrew/opt/util-linux/include
++LDFLAGS = -g -L/opt/homebrew/opt/util-linux/lib
+ LDLIBS = -luuid -lm
+ 
+ SRCS = rmpart.c
+diff --color --exclude=.git -ruN eco32/disk/tools/shgpt/Makefile eco32/disk/tools/shgpt/Makefile
+--- eco32/disk/tools/shgpt/Makefile	2025-01-28 01:29:19
++++ eco32/disk/tools/shgpt/Makefile	2025-01-28 00:29:47
+@@ -5,8 +5,8 @@
+ BUILD = ../../../build
+ 
+ CC = gcc
+-CFLAGS = -g -Wall
+-LDFLAGS = -g
++CFLAGS = -g -Wall -I/opt/homebrew/opt/util-linux/include
++LDFLAGS = -g -L/opt/homebrew/opt/util-linux/lib
+ LDLIBS = -luuid -lm
+ 
+ SRCS = shgpt.c
+diff --color --exclude=.git -ruN eco32/disk/tools/shpart/depend.mak eco32/disk/tools/shpart/depend.mak
+--- eco32/disk/tools/shpart/depend.mak	1970-01-01 01:00:00
++++ eco32/disk/tools/shpart/depend.mak	2025-01-27 23:43:02
+@@ -0,0 +1 @@
++shpart.o: shpart.c
+diff --color --exclude=.git -ruN eco32/disk/tools/wrpart/Makefile eco32/disk/tools/wrpart/Makefile
+--- eco32/disk/tools/wrpart/Makefile	2025-01-28 01:29:19
++++ eco32/disk/tools/wrpart/Makefile	2025-01-28 00:30:00
+@@ -5,8 +5,8 @@
+ BUILD = ../../../build
+ 
+ CC = gcc
+-CFLAGS = -g -Wall
+-LDFLAGS = -g
++CFLAGS = -g -Wall -I/opt/homebrew/opt/util-linux/include
++LDFLAGS = -g -L/opt/homebrew/opt/util-linux/lib
+ LDLIBS = -luuid -lm
+ 
+ SRCS = wrpart.c gpt.c
+diff --color --exclude=.git -ruN eco32/sim/Makefile eco32/sim/Makefile
+--- eco32/sim/Makefile	2025-01-28 01:29:19
++++ eco32/sim/Makefile	2025-01-28 00:47:29
+@@ -5,8 +5,8 @@
+ BUILD = ../build
+ 
+ CC = gcc
+-CFLAGS = -g -Wall -I./fpu -I./getline -I/usr/X11R7/include
+-LDFLAGS = -g -L./getline -L/usr/X11R7/lib -Wl,-rpath -Wl,/usr/X11R7/lib
++CFLAGS = -g -Wall -I./fpu -I./getline -I/usr/X11/include -I/opt/X11/include
++LDFLAGS = -g -L./getline -L/usr/X11/lib -L/opt/X11/lib -Wl,-rpath -Wl,/usr/X11/lib
+ LDLIBS = -lgetline -lX11 -lpthread -lm
+ 
+ SRCS = main.c console.c error.c except.c command.c \
+diff --color --exclude=.git -ruN eco32/disk/tools/Makefile.run eco32/disk/tools/Makefile.run
+--- eco32/disk/tools/Makefile.run	2025-01-27 23:43:46
++++ eco32/disk/tools/Makefile.run	2025-01-28 01:54:01
+@@ -47,7 +47,7 @@
+ all:		$(DSK_IMG)
+ 
+ run-sim-dsk:	$(DSK_IMG)
+-		$(BUILD)/bin/sim -i -m 32 -c -s 2 -t 0 -t 1 \
++		$(BUILD)/bin/sim -m 32 -c -s 2 -t 0 -t 1 \
+ 		  -r $(BUILD)/monitor/simulator/monitor.bin \
+ 		  -d $(DSK_IMG) -o $(RUN_LOG)
+ 
