@@ -46,5 +46,16 @@ patch -p0 < eco32.patch
 patch -p0 < eos32.patch
 ```
 
+Afterwards you can compile and run both projects as usual. 
+See the individual READMEs for further information.
+
 Notes 
 -----
+Due to compatibility issues this project disables the interactive mode for the simulator by omitting the `-i` switch.
+
+This project was tested with the following software versions:
+- macOS Sequoia 15.2 on a MacBook Air M2
+- ECO32 on the `fp` branch with HEAD at commit `dbca03b`
+- EOS32 with HEAD at commit `ce67b96`
+
+**IMPORTANT**: This _should_ work without problems. But I cannot promise that. So be prepared for weird issues!
